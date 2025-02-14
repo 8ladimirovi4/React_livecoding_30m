@@ -1,0 +1,19 @@
+.user-list-wrapper {
+  display: flex;
+  flex: 1;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 30px;
+}
+
+.user-list-wrapper_users-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.user-list-wrapper_users {
+  display: flex;
+  width: 300px;
+  justify-content: space-between;
+  padding: 10px;
+}
