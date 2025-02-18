@@ -11,12 +11,26 @@ const selectItems = [
   { name: "4", option: "4" },
 ];
 
+
 const Toolbar = ({
   search,
-  handleFilterFields,
-  handleSortFields,
-  handleSetPerPage,
+  setSortField,
+  setSearch,
+  setPerPage,
 }: ToolbarProps) => {
+
+  const handleSortFields = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSortField(e.target.value);
+  };
+
+  const handleFilterFields = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+  };
+
+  const handleSetPerPage = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setPerPage(Number(e.target.value));
+  };
+
   return (
     <>
       <CommonInput
