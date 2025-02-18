@@ -2,18 +2,37 @@
   display: flex;
   flex: 1;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
+  flex-direction: column;
   gap: 30px;
+  padding: 50px;
 }
 
-.user-list-wrapper_users-wrapper {
+.user-list-wrapper_toolbar {
+  display: flex;
+  gap: 10px;
+}
+
+.user-list-wrapper_list {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 5px;
+  padding: 0;
 }
-.user-list-wrapper_users {
+
+.user-list-wrapper_item {
   display: flex;
-  width: 300px;
-  justify-content: space-between;
-  padding: 10px;
+  width: 250px;
+}
+
+.user-list-wrapper_item_buttons {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.user-list-wrapper_buttons {
+  display: flex;
+  width: 100%;
+  gap: 10px;
 }
