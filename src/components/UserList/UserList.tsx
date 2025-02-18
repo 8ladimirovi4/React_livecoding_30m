@@ -1,12 +1,12 @@
 import "./styles.css";
 import { useState, useEffect, useCallback, useMemo } from "react";
-import { UserType } from "./types";
-import CommonButton from "../CommonButton/CommonButton";
+import { UserListProps, UserType } from "./types";
 import UserModal from "../UserModal/UserModal";
 import Toolbar from "../../features/Toolbar/Toolbar";
 import Pagination from "../../features/Pgination/Pagination";
+import User from "../User/User";
 
-const UserList = () => {
+const UserList = ({ theme }: UserListProps) => {
   const [users, setUsers] = useState<UserType[]>([]);
   const [filteredUsers, setFilteredUsers] = useState<UserType[]>([]);
   const [selectedUser, setSelectedUser] = useState<UserType | null>(null);
@@ -67,18 +67,6 @@ const UserList = () => {
 
   const handleCloseModal = () => setSelectedUser(null);
 
-  const handleSortFields = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSortField(e.target.value);
-  };
-
-  const handleFilterFields = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
-  };
-
-  const handleSetPerPage = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setPerPage(Number(e.target.value));
-  };
-
   // Запоминаем данные, чтобы избежать лишних ререндеров, выводим на экран заданное кол-во юзеров
   const paginatedUsers = useMemo(() => {
     const start = (page - 1) * perPage;
@@ -89,33 +77,29 @@ const UserList = () => {
   if (error) return <p style={{ color: "red" }}>{error}</p>;
 
   return (
-    <div className="user-list-wrapper">
+    <div
+      className={
+        theme === "light"
+          ? "user-list-wrapper"
+          : "user-list-wrapper" + " " + "user-list-wrapper-dark"
+      }
+    >
       <div className="user-list-wrapper_toolbar">
         <Toolbar
           search={search}
-          handleFilterFields={handleFilterFields}
-          handleSortFields={handleSortFields}
-          handleSetPerPage={handleSetPerPage}
+          setSortField={setSortField}
+          setSearch={setSearch}
+          setPerPage={setPerPage}
         />
       </div>
       <div className="user-list-wrapper_buttons">
         <Pagination paginatedUsers={paginatedUsers} setPage={setPage} />
       </div>
       {paginatedUsers.length ? (
-        <>
-          <ul className="user-list-wrapper_list">
-            {paginatedUsers.map((user) => (
-              <li key={user.id} className="user-list-wrapper_item">
-                <span>{user.name}</span>
-                <div className="user-list-wrapper_item_buttons">
-                  <CommonButton onClick={() => handleSelectUser(user)}>
-                    Подробнее
-                  </CommonButton>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </>
+        <User
+          paginatedUsers={paginatedUsers}
+          handleSelectUser={handleSelectUser}
+        />
       ) : (
         <p>Пользователи не найдены</p>
       )}

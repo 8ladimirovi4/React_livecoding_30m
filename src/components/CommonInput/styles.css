@@ -1,0 +1,8 @@
+.input {
+  color: black;
+}
+
+.input-dark {
+  color: white;
+  background-color: rgb(49, 49, 170);
+}

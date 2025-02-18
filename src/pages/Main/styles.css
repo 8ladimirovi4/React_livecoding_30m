@@ -1,0 +1,9 @@
+.main-button {
+  padding: 10px;
+  padding-left: 50px;
+}
+
+.main-wrapper-dark {
+  height: 100%;
+  background-color: rgb(56, 34, 56);
+}

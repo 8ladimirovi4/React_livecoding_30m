@@ -1,0 +1,8 @@
+.button {
+  color: black;
+}
+
+.button-dark {
+  color: white;
+  background-color: rgb(49, 49, 170);
+}

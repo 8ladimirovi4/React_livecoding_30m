@@ -1,6 +1,6 @@
 export interface ToolbarProps {
   search: string;
-  handleFilterFields: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleSortFields: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  handleSetPerPage: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  setSortField: React.Dispatch<React.SetStateAction<string>>,
+  setSearch: React.Dispatch<React.SetStateAction<string>>;
+  setPerPage: React.Dispatch<React.SetStateAction<number>>;
 }

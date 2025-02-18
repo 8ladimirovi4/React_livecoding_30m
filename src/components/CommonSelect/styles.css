@@ -1,0 +1,8 @@
+.select {
+  color: black;
+}
+
+.select-dark {
+  color: white;
+  background-color: rgb(49, 49, 170);
+}
