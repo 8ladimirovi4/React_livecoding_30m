@@ -1,12 +1,12 @@
 import "./styles.css";
 import { useState, useEffect, useCallback, useMemo } from "react";
-import { UserType } from "./types";
+import { UserListProps, UserType } from "./types";
 import UserModal from "../UserModal/UserModal";
 import Toolbar from "../../features/Toolbar/Toolbar";
 import Pagination from "../../features/Pgination/Pagination";
 import User from "../User/User";
 
-const UserList = () => {
+const UserList = ({ theme }: UserListProps) => {
   const [users, setUsers] = useState<UserType[]>([]);
   const [filteredUsers, setFilteredUsers] = useState<UserType[]>([]);
   const [selectedUser, setSelectedUser] = useState<UserType | null>(null);
@@ -77,7 +77,13 @@ const UserList = () => {
   if (error) return <p style={{ color: "red" }}>{error}</p>;
 
   return (
-    <div className="user-list-wrapper">
+    <div
+      className={
+        theme === "light"
+          ? "user-list-wrapper"
+          : "user-list-wrapper" + " " + "user-list-wrapper-dark"
+      }
+    >
       <div className="user-list-wrapper_toolbar">
         <Toolbar
           search={search}
@@ -90,7 +96,10 @@ const UserList = () => {
         <Pagination paginatedUsers={paginatedUsers} setPage={setPage} />
       </div>
       {paginatedUsers.length ? (
-        <User paginatedUsers={paginatedUsers} handleSelectUser={handleSelectUser}/>
+        <User
+          paginatedUsers={paginatedUsers}
+          handleSelectUser={handleSelectUser}
+        />
       ) : (
         <p>Пользователи не найдены</p>
       )}

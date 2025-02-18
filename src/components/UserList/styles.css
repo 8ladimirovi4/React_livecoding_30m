@@ -8,6 +8,11 @@
   padding: 50px;
 }
 
+.user-list-wrapper-dark {
+  background-color: rgb(56, 34, 56);
+  color: white;
+}
+
 .user-list-wrapper_toolbar {
   display: flex;
   gap: 10px;
