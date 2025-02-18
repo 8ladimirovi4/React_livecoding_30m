@@ -15,7 +15,7 @@ const Main = () => {
   return(
     <div className={theme === 'dark' ? "main-wrapper-dark" : ""}>
     <div className="main-button">
-<CommonButton onClick={toggleTheme} >{ theme ==='dark' ? 'Темная тема' : 'Светлая тема'}</CommonButton>
+<CommonButton onClick={toggleTheme} >{ theme ==='dark' ? 'Светлая тема' : 'Темная тема'}</CommonButton>
     </div>
 <UserList theme={theme}/>;
 </div>
