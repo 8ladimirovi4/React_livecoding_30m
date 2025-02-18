@@ -3,19 +3,8 @@ import { useState, useEffect, useCallback, useMemo } from "react";
 import { UserType } from "./types";
 import CommonButton from "../CommonButton/CommonButton";
 import UserModal from "../UserModal/UserModal";
-import CommonInput from "../CommonInput/CommonInput";
-import CommonSelect from "../CommonSelect/CommonSelect";
 import Toolbar from "../../features/Toolbar/Toolbar";
 import Pagination from "../../features/Pgination/Pagination";
-
-const selectValues = [
-  { name: "по имени", option: "name" },
-  { name: "по email", option: "email" },
-];
-const selectItems = [
-  { name: "2", option: "2" },
-  { name: "4", option: "4" },
-];
 
 const UserList = () => {
   const [users, setUsers] = useState<UserType[]>([]);
@@ -25,7 +14,6 @@ const UserList = () => {
   const [error, setError] = useState<string | null>(null);
   const [search, setSearch] = useState<string>("");
   const [sortField, setSortField] = useState("name");
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(2);
 
@@ -92,6 +80,7 @@ const UserList = () => {
     setPerPage(Number(e.target.value));
   };
 
+
   // Запоминаем данные, чтобы избежать лишних ререндеров, выводим на экран заданное кол-во юзеров
   const paginatedUsers = useMemo(() => {
     const start = (page - 1) * perPage;
@@ -112,7 +101,12 @@ const UserList = () => {
               handleSetPerPage={handleSetPerPage}
             />
           </div>
-
+          <div className="user-list-wrapper_buttons">
+            <Pagination 
+            paginatedUsers={paginatedUsers}
+            setPage={setPage} 
+            />
+          </div>
           <ul className="user-list-wrapper_list">
             {paginatedUsers.map((user) => (
               <li key={user.id} className="user-list-wrapper_item">
@@ -125,9 +119,6 @@ const UserList = () => {
               </li>
             ))}
           </ul>
-          <div className="user-list-wrapper_buttons">
-            <Pagination setPage={setPage} />
-          </div>
         </>
       ) : (
         <>
@@ -139,10 +130,13 @@ const UserList = () => {
               handleSetPerPage={handleSetPerPage}
             />
           </div>
-          <p>Пользователи не найдены</p>
           <div className="user-list-wrapper_buttons">
-            <Pagination setPage={setPage} />
+            <Pagination 
+            setPage={setPage} 
+            paginatedUsers={paginatedUsers}
+            />
           </div>
+          <p>Пользователи не найдены</p>
         </>
       )}
       {selectedUser && (
