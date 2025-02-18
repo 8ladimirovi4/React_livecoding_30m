@@ -9,3 +9,8 @@ export interface UserType {
     zipcode: string;
   };
 }
+
+export type SortableFields = Extract<
+  keyof UserType,
+  "name" | "email" | "phone"
+>;
