@@ -10,7 +10,7 @@ const UserList = () => {
   const [users, setUsers] = useState<UserType[]>([]);
   const [filteredUsers, setFilteredUsers] = useState<UserType[]>([]);
   const [selectedUser, setSelectedUser] = useState<UserType | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [search, setSearch] = useState<string>("");
   const [sortField, setSortField] = useState("name");
@@ -20,7 +20,6 @@ const UserList = () => {
   // Фетчинг пользователей с кэшированием
   useEffect(() => {
     const fetchUsers = async () => {
-      setLoading(true);
       setError(null);
       try {
         const response = await fetch(
@@ -80,33 +79,30 @@ const UserList = () => {
     setPerPage(Number(e.target.value));
   };
 
-
   // Запоминаем данные, чтобы избежать лишних ререндеров, выводим на экран заданное кол-во юзеров
   const paginatedUsers = useMemo(() => {
     const start = (page - 1) * perPage;
     return filteredUsers.slice(start, start + perPage);
   }, [filteredUsers, page, perPage]);
 
+  if (loading) return <p>Загрузка...</p>;
+  if (error) return <p style={{ color: "red" }}>{error}</p>;
+
   return (
     <div className="user-list-wrapper">
-      {loading && <p>Загрузка...</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      <div className="user-list-wrapper_toolbar">
+        <Toolbar
+          search={search}
+          handleFilterFields={handleFilterFields}
+          handleSortFields={handleSortFields}
+          handleSetPerPage={handleSetPerPage}
+        />
+      </div>
+      <div className="user-list-wrapper_buttons">
+        <Pagination paginatedUsers={paginatedUsers} setPage={setPage} />
+      </div>
       {paginatedUsers.length ? (
         <>
-          <div className="user-list-wrapper_toolbar">
-            <Toolbar
-              search={search}
-              handleFilterFields={handleFilterFields}
-              handleSortFields={handleSortFields}
-              handleSetPerPage={handleSetPerPage}
-            />
-          </div>
-          <div className="user-list-wrapper_buttons">
-            <Pagination 
-            paginatedUsers={paginatedUsers}
-            setPage={setPage} 
-            />
-          </div>
           <ul className="user-list-wrapper_list">
             {paginatedUsers.map((user) => (
               <li key={user.id} className="user-list-wrapper_item">
@@ -121,29 +117,13 @@ const UserList = () => {
           </ul>
         </>
       ) : (
-        <>
-          <div className="user-list-wrapper_toolbar">
-            <Toolbar
-              search={search}
-              handleFilterFields={handleFilterFields}
-              handleSortFields={handleSortFields}
-              handleSetPerPage={handleSetPerPage}
-            />
-          </div>
-          <div className="user-list-wrapper_buttons">
-            <Pagination 
-            setPage={setPage} 
-            paginatedUsers={paginatedUsers}
-            />
-          </div>
-          <p>Пользователи не найдены</p>
-        </>
+        <p>Пользователи не найдены</p>
       )}
+
       {selectedUser && (
         <UserModal userInfo={selectedUser} onClose={handleCloseModal} />
       )}
     </div>
   );
 };
-
 export default UserList;
