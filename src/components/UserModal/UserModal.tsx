@@ -1,3 +1,4 @@
+import CommonButton from "../CommonButton/CommonButton";
 import { UserInfoProps } from "./types";
 
 const UserModal = ({
@@ -21,7 +22,7 @@ const UserModal = ({
           <strong>Адрес:</strong>{" "}
           {`${userInfo?.address.street}, ${userInfo?.address.city}, ${userInfo?.address.zipcode}`}
         </p>
-        <button onClick={onClose}>Закрыть</button>
+        <CommonButton onClick={onClose}>Закрыть</CommonButton>
       </div>
     </div>
   );

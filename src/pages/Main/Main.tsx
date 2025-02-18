@@ -13,12 +13,12 @@ const Main = () => {
   const { theme, toggleTheme } = themeContext;
 
   return(
-    <>
+    <div className={theme === 'dark' ? "main-wrapper-dark" : ""}>
     <div className="main-button">
 <CommonButton onClick={toggleTheme} >{ theme ==='dark' ? 'Темная тема' : 'Светлая тема'}</CommonButton>
     </div>
 <UserList theme={theme}/>;
-</>
+</div>
   ) 
 };
 
