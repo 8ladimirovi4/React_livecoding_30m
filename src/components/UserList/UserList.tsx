@@ -73,9 +73,8 @@ const UserList = ({ theme }: UserListProps) => {
     return filteredUsers.slice(start, start + perPage);
   }, [filteredUsers, page, perPage]);
 
-  // if (loading) return <p>Загрузка...</p>;
-  // if (error) return <p style={{ color: "red" }}>{error}</p>;
-
+  if (loading) return <p>Загрузка...</p>;
+  if (error) return <p style={{ color: "red" }}>{error}</p>;
   return (
     <div
       className={
