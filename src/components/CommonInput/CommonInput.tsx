@@ -7,6 +7,7 @@ const CommonInput = ({
   placeholder = "",
   value = "",
   inputAction = () => {},
+  testId
 }: InputProps) => {
   const themeContext = useTheme();
 
@@ -22,6 +23,7 @@ const CommonInput = ({
       placeholder={placeholder}
       value={value}
       onChange={inputAction}
+      data-testid={testId}
     />
   );
 };

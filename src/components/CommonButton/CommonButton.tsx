@@ -4,7 +4,7 @@ import { useTheme } from "../../context/ThemeContext";
 import "./styles.css";
 // Кнопка - это переиспользуемый компонент
 // React.memo предотвращать повторный рендер компонента, если его props не изменились
-const CommonButton = React.memo(({ onClick, children }: ButtonProps) => {
+const CommonButton = React.memo(({ onClick, children, testId }: ButtonProps) => {
   const themeContext = useTheme();
 
   if (!themeContext) {
@@ -16,6 +16,7 @@ const CommonButton = React.memo(({ onClick, children }: ButtonProps) => {
     <button
       className={theme === "light" ? "button" : "button" + " " + "button-dark"}
       onClick={onClick}
+      data-testid={testId}
     >
       {children}
     </button>
