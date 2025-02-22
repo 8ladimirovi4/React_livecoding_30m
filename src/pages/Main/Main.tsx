@@ -4,23 +4,17 @@ import { useTheme } from "../../context/ThemeContext";
 import "./styles.css";
 
 const Main = () => {
-  const themeContext = useTheme();
-
-  if (!themeContext) {
-    return null;
-  }
-
-  const { theme, toggleTheme } = themeContext;
+  const { theme, toggleTheme } = useTheme();
 
   return (
-    <div className={theme === "dark" ? "main-wrapper-dark" : ""}>
+    <>
       <div className="main-button">
         <CommonButton onClick={toggleTheme} testId={"toogle-theme"}>
           {theme === "dark" ? "Светлая тема" : "Темная тема"}
         </CommonButton>
       </div>
-      <UserList theme={theme} />;
-    </div>
+      <UserList />;
+    </>
   );
 };
 

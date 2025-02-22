@@ -4,7 +4,7 @@ export interface ThemeContextProps {
   children: React.ReactNode; // Тип для пропса children в ThemeProvider
 }
 
-export interface ThemeContextValue {
+export interface ThemeContextType {
   theme: Theme;
   toggleTheme: () => void;
 }

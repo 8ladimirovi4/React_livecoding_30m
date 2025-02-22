@@ -8,3 +8,9 @@ body,
   height: 100%;
   box-sizing: border-box;
 }
+
+.dark {
+  background-color: rgb(56, 34, 56);
+  color: white;
+}
+

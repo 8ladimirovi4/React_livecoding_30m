@@ -1,7 +1,3 @@
-export interface UserListProps {
-  theme: string;
-}
-
 export interface UserType {
   id: number;
   name: string;

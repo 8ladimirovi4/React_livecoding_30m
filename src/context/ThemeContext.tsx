@@ -1,10 +1,11 @@
-// ThemeContext.tsx
-
 import { createContext, useState, useContext, useEffect } from "react";
-import { Theme, ThemeContextProps, ThemeContextValue } from "./types";
+import { Theme, ThemeContextProps, ThemeContextType } from "./types";
 
 // Типизация контекста, где значение может быть ThemeContextValue или null
-const ThemeContext = createContext<ThemeContextValue | null>(null);
+const ThemeContext = createContext<ThemeContextType>({
+  theme: "light",
+  toggleTheme: () => {},
+});
 
 export const ThemeProvider = ({ children }: ThemeContextProps) => {
   const storedTheme = localStorage.getItem("theme") || "light";
@@ -26,4 +27,4 @@ export const ThemeProvider = ({ children }: ThemeContextProps) => {
   );
 };
 
-export const useTheme = () => useContext(ThemeContext); // Возвращаем типизированное значение
+export const useTheme = () => useContext(ThemeContext);
